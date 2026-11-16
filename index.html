@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Мадлена — меню</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fbf4ec; --paper:#fffaf4; --blush:#f6d9d3; --choco:#3b2418; --choco2:#6b4a3a;
+  --gold:#c79a55; --gold2:#e7c58c; --rose:#d86f7a; --mint:#9cc9b4; --wa:#25d366;
+  --shadow:0 10px 30px -12px rgba(59,36,24,.25);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Manrope,system-ui,sans-serif;color:var(--choco);background:var(--cream);
+  background-image:
+    radial-gradient(circle at 12% 8%,rgba(246,217,211,.7),transparent 40%),
+    radial-gradient(circle at 90% 30%,rgba(231,197,140,.25),transparent 35%),
+    radial-gradient(rgba(59,36,24,.06) 1px,transparent 1.2px);
+  background-size:auto,auto,18px 18px;
+  padding-bottom:calc(110px + env(safe-area-inset-bottom));
+}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;margin:0}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:hidden;text-align:center;padding:calc(28px + env(safe-area-inset-top)) 16px 26px}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero .inner{position:relative}
+.kicker{letter-spacing:.32em;text-transform:uppercase;font-size:11px;font-weight:700;color:var(--gold)}
+.logo{font-style:italic;font-weight:600;font-size:clamp(54px,15vw,92px);line-height:1;margin:6px 0 0;
+  background:linear-gradient(100deg,var(--choco) 30%,#8a5a3c 45%,var(--gold) 50%,#8a5a3c 55%,var(--choco) 70%);
+  background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s ease-in-out infinite}
+@keyframes shine{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+.flourish{display:block;margin:2px auto 0;width:180px;height:22px}
+.flourish path{stroke:var(--gold);stroke-width:2;fill:none;stroke-dasharray:260;stroke-dashoffset:260;animation:draw 2.2s .3s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.sub{color:var(--choco2);font-size:15px;margin:10px 0 0}
+.hero-cake{width:min(280px,72vw);margin:6px auto 0;display:block;animation:bob 4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(-1deg)}}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .5s ease-in-out infinite alternate}
+@keyframes flick{from{transform:scale(1,1) rotate(-3deg)}to{transform:scale(.88,1.12) rotate(3deg)}}
+.hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s}
+.btn:active{transform:scale(.96)}
+.btn-dark{background:var(--choco);color:var(--paper);box-shadow:var(--shadow)}
+.btn-light{background:var(--paper);color:var(--choco);border:1.5px solid rgba(59,36,24,.15)}
+.btn-wa{background:var(--wa);color:#fff;box-shadow:0 10px 24px -10px rgba(37,211,102,.7)}
+.dice{display:inline-block}
+.btn:hover .dice{animation:roll .6s ease}
+@keyframes roll{to{transform:rotate(360deg)}}
+
+/* ---------- CHIPS ---------- */
+.chips{position:sticky;top:0;z-index:20;background:rgba(251,244,236,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(59,36,24,.08);padding-top:env(safe-area-inset-top)}
+.chips .row{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;scrollbar-width:none;max-width:920px;margin:0 auto}
+.chips .row::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:9px 16px;border-radius:999px;font-weight:700;font-size:14px;background:var(--paper);border:1.5px solid rgba(59,36,24,.1);transition:.25s}
+.chip.on{background:var(--choco);color:var(--paper);border-color:var(--choco)}
+
+/* ---------- SECTIONS ---------- */
+section{padding-top:30px;scroll-margin-top:64px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.sec-head h2{font-size:30px;font-weight:700}
+.sec-head .line{flex:1;height:10px;background:radial-gradient(circle,var(--gold) 1.6px,transparent 2px) 0 50%/12px 10px repeat-x;opacity:.7}
+.sec-note{margin:-8px 0 16px;color:var(--choco2);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+
+.card{position:relative;background:var(--paper);border-radius:22px;padding:10px 12px 12px;box-shadow:var(--shadow);border:1px solid rgba(59,36,24,.06);cursor:pointer;
+  opacity:0;transform:translateY(26px) scale(.97);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1.2)}
+.card.in{opacity:1;transform:none}
+.card .art{aspect-ratio:1;margin:-2px -4px 4px;border-radius:16px}
+.card .art svg{width:100%;height:100%;display:block;transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.card:hover .art svg{transform:rotate(-4deg) scale(1.05)}
+.card.jelly .art svg{animation:jelly .6s}
+@keyframes jelly{30%{transform:scale(1.12,.9)}50%{transform:scale(.94,1.08)}70%{transform:scale(1.04,.97)}100%{transform:none}}
+.card h3{font-size:17px;line-height:1.2;font-weight:700}
+.card p{margin:5px 0 10px;font-size:13px;line-height:1.4;color:var(--choco2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card .bottom{display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:36px}
+.price{font-weight:800;font-size:16px;white-space:nowrap}
+.price small{font-weight:600;color:var(--choco2);font-size:12px}
+.tags{position:absolute;top:12px;left:12px;display:flex;flex-direction:column;gap:4px;z-index:2}
+.tag{font-size:10.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--choco);color:#fff;width:max-content}
+.tag.spicy{background:#c8402c} .tag.kids{background:#5b8fd6}
+
+/* stepper */
+.add{width:36px;height:36px;border-radius:50%;background:var(--choco);color:#fff;font-size:22px;line-height:1;display:grid;place-items:center;transition:transform .2s}
+.add:active{transform:scale(.85)}
+.step{display:flex;align-items:center;background:var(--choco);color:#fff;border-radius:999px;height:36px;animation:pop .3s}
+.step button{width:32px;height:36px;font-size:19px;font-weight:700;color:#fff}
+.step span{min-width:18px;text-align:center;font-weight:800}
+@keyframes pop{0%{transform:scale(.6)}70%{transform:scale(1.08)}}
+
+/* ---------- SHEET ---------- */
+.back{position:fixed;inset:0;background:rgba(40,24,16,.45);z-index:50;opacity:0;transition:opacity .3s;backdrop-filter:blur(3px)}
+.back.show{opacity:1}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;max-width:560px;margin:0 auto;background:var(--paper);border-radius:28px 28px 0 0;
+  max-height:92vh;overflow:auto;padding:12px 20px calc(24px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .45s cubic-bezier(.2,.9,.25,1)}
+.sheet.show{transform:none}
+.sheet .grab{width:44px;height:5px;border-radius:9px;background:rgba(59,36,24,.18);margin:0 auto 6px}
+.sheet .x{position:absolute;right:14px;top:12px;width:36px;height:36px;border-radius:50%;background:var(--cream);font-size:20px}
+.sheet .big{width:min(260px,70vw);margin:0 auto;display:block}
+.sheet h3{font-size:28px;text-align:center;margin-top:4px}
+.sheet .lead{text-align:center;color:var(--choco2);margin:8px 0 14px;line-height:1.5}
+.facts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.fact{background:var(--cream);border-radius:12px;padding:8px 12px;font-size:13px}
+.fact b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--gold)}
+.sheet .buy{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px dashed rgba(59,36,24,.2);padding-top:14px}
+.sheet .buy .price{font-size:24px}
+
+/* surprise */
+.spin{text-align:center;padding:10px 0 4px}
+.spin-art{width:220px;height:220px;margin:0 auto}
+.spin-art svg{width:100%;height:100%}
+.spin-name{font-size:26px;min-height:34px}
+.spin.done .spin-art{animation:jelly .7s}
+
+/* ---------- CART ---------- */
+.bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:30;max-width:560px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;border-radius:20px;background:var(--choco);color:#fff;
+  box-shadow:0 18px 40px -14px rgba(59,36,24,.7);transform:translateY(160%);transition:transform .45s cubic-bezier(.2,.9,.25,1.2)}
+.bar.show{transform:none}
+.bar .bag{display:flex;align-items:center;gap:10px;font-weight:700}
+.bar .count{background:var(--gold);color:var(--choco);border-radius:999px;min-width:26px;height:26px;display:grid;place-items:center;font-weight:800;font-size:14px}
+.bar.bump .count{animation:pop .4s}
+.bar .sum{font-weight:800;font-size:17px}
+.dot{position:fixed;z-index:60;width:16px;height:16px;border-radius:50%;background:var(--gold);pointer-events:none;box-shadow:0 0 0 3px #fff}
+.line-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(59,36,24,.08)}
+.line-item .mini{width:52px;height:52px;flex:none}
+.line-item .mini svg{width:100%;height:100%}
+.line-item .nm{flex:1;font-weight:700;font-size:15px}
+.line-item .nm small{display:block;font-weight:500;color:var(--choco2)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--cream);border-radius:14px;padding:4px;margin:16px 0 12px}
+.seg button{padding:10px 4px;border-radius:11px;font-weight:700;font-size:13.5px}
+.seg button.on{background:var(--paper);box-shadow:0 2px 8px rgba(59,36,24,.12)}
+.field{display:block;margin-bottom:10px}
+.field span{display:block;font-size:12px;font-weight:700;color:var(--choco2);margin:0 0 4px 4px}
+.field input,.field textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border-radius:14px;border:1.5px solid rgba(59,36,24,.14);background:#fff;color:var(--choco);outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+.field.err input{border-color:var(--rose);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.sub-row{display:flex;justify-content:space-between;color:var(--choco2);font-size:14px;margin-top:8px}
+.total{display:flex;justify-content:space-between;font-size:20px;font-weight:800;margin:14px 0}
+.actions{display:grid;gap:10px}
+.actions .btn{justify-content:center}
+.phone-note{text-align:center;font-size:13px;color:var(--choco2);margin-top:8px}
+
+.toast{position:fixed;left:50%;top:calc(18px + env(safe-area-inset-top));transform:translate(-50%,-150%);z-index:70;background:var(--choco);color:#fff;padding:12px 18px;border-radius:14px;font-weight:700;font-size:14px;transition:transform .35s;max-width:90vw;text-align:center}
+.toast{opacity:0;visibility:hidden}.toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:80}
+
+footer{text-align:center;padding:40px 16px 10px;color:var(--choco2);font-size:13px}
+footer .logo-s{font-family:"Playfair Display",serif;font-style:italic;font-size:28px;color:var(--choco)}
+
+/* svg ink */
+.ink *{stroke:var(--choco);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round}
+.ink .ns{stroke:none}
+.ink .thin{stroke-width:1.4}
+.ink .shine{stroke:#fff;stroke-width:2.6;fill:none;opacity:.75}
+.steam{fill:none;opacity:0;transform-box:fill-box;animation:steam 3s ease-in-out infinite}
+.steam.d2{animation-delay:1s}.steam.d3{animation-delay:2s}
+@keyframes steam{0%{transform:translateY(8px);opacity:0}40%{opacity:.7}100%{transform:translateY(-12px);opacity:0}}
+.bub{transform-box:fill-box;animation:bub 2.6s ease-in infinite;opacity:0}
+@keyframes bub{0%{transform:translateY(0);opacity:0}20%{opacity:.9}100%{transform:translateY(-38px);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.card{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="sk"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="2.4"/></filter>
+</svg>
+
+<header class="hero">
+  <canvas id="sprinkles"></canvas>
+  <div class="inner">
+    <div class="kicker">кафе · павлодар</div>
+    <h1 class="logo">Мадлена</h1>
+    <svg class="flourish" viewBox="0 0 180 22"><path d="M4 12 C40 2 60 22 90 11 C120 0 140 20 176 10 M84 11 q6 -9 12 0 q-6 9 -12 0"/></svg>
+    <p class="sub" id="sub"></p>
+    <div id="heroCake"></div>
+    <div class="hero-actions">
+      <a class="btn btn-dark" href="#menu-start">Смотреть меню ↓</a>
+      <button class="btn btn-light" id="surpriseBtn"><span class="dice">🎲</span> Удиви меня</button>
+    </div>
+  </div>
+</header>
+
+<nav class="chips"><div class="row" id="chips"></div></nav>
+<main class="wrap" id="menu-start"></main>
+
+<footer>
+  <div class="logo-s">Мадлена</div>
+  <div>Пожалуйста, предупредите официанта о наличии пищевой аллергии</div><div style="margin-top:6px;font-weight:700">Обслуживание 10%</div><div style="margin-top:10px">Телефон: <a href="tel:+77081037530" style="color:inherit;font-weight:700">+7 708 103 75 30</a> · <a href="https://wa.me/77081037530" target="_blank" rel="noopener" style="color:inherit;font-weight:700">WhatsApp</a></div>
+</footer>
+
+<div class="bar" id="bar"><div class="bag"><span class="count" id="barCount">0</span> Ваш заказ</div><div class="sum" id="barSum">0 ₸ →</div></div>
+<div class="toast" id="toast"></div>
+<canvas id="fx"></canvas>
+
+<script>
+const ORDER_MODE = /zakaz/.test(location.search+location.hash);
+document.getElementById("sub").textContent=ORDER_MODE?"Выберите блюда, нажмите «+» — и отправьте заказ в WhatsApp в одно касание.":"Завтраки весь день, салаты, паста, пицца и горячее. Нажмите на блюдо, чтобы прочитать описание.";
+if(ORDER_MODE)document.title="Мадлена — меню с заказом";
+const PHONE = "+7 708 103 75 30";
+const PHONE_DIGITS = PHONE.replace(/\D/g,"");
+
+/* ================== РИСУНКИ (SVG) ================== */
+const wrap=(inner,bg="#f6d9d3")=>`<svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="64" r="50" fill="${bg}"/><ellipse class="ns" cx="60" cy="104" rx="36" ry="5" fill="#3b2418" opacity=".08"/><g class="ink" filter="url(#sk)">${inner}</g></svg>`;
+const dots=(arr,c,r=1.3)=>arr.map(([x,y])=>`<circle class="ns" cx="${x}" cy="${y}" r="${r}" fill="${c}"/>`).join("");
+const steam=(xs,y)=>xs.map((x,i)=>`<path class="steam d${i+1} thin" d="M${x} ${y} q-5 -7 0 -13 q5 -6 0 -13"/>`).join("");
+const berry=(x,y,c="#d8434f")=>`<circle cx="${x}" cy="${y}" r="5" fill="${c}"/><circle class="ns" cx="${x-1.6}" cy="${y-1.6}" r="1.3" fill="#fff" opacity=".8"/>`;
+
+/* детерминированный «рандом», чтобы рисунок блюда всегда был одинаковым */
+let seed=1;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const pick=a=>a[Math.floor(rnd()*a.length)];
+const scatter=(n,cx,cy,R,fn)=>{let s="";for(let i=0;i<n;i++){const a=rnd()*6.283,r=Math.sqrt(rnd())*R;s+=fn(cx+Math.cos(a)*r,cy+Math.sin(a)*r,i)}return s};
+const fleck=(n,cx,cy,R,c,r=1.2)=>scatter(n,cx,cy,R,(x,y)=>`<circle class="ns" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${c}"/>`);
+
+/* посуда */
+const P=(inner,bg="#f3e6d8")=>wrap(`<circle cx="60" cy="62" r="45" fill="#fff"/><circle class="thin" cx="60" cy="62" r="35" fill="none" style="stroke-opacity:.2"/>${inner}`,bg);
+const BOWL=(fill,inner,bg="#e9f1df")=>wrap(`<circle cx="60" cy="62" r="45" fill="#fff"/><circle cx="60" cy="62" r="36" fill="${fill}"/>${inner}`,bg);
+const PAN=(fill,inner,bg="#f6dccb")=>wrap(`<path d="M94 34 l18 -16" style="stroke-width:8"/><path d="M94 34 l18 -16" style="stroke:#6b4a3a;stroke-width:4"/><circle cx="58" cy="64" r="42" fill="#3d3532"/><circle cx="58" cy="64" r="35" fill="${fill}"/>${inner}`,bg);
+
+/* продукты */
+const egg=(x,y,s=1)=>`<path d="M${x-10*s} ${y+1} q-1 -9 9 -10 q10 -1 11 7 q1 10 -9 10 q-10 1 -11 -7z" fill="#fff"/><circle cx="${x}" cy="${y}" r="${4.6*s}" fill="#ffc22e"/><circle class="ns" cx="${x-1.4*s}" cy="${y-1.4*s}" r="${1.2*s}" fill="#fff" opacity=".8"/>`;
+const pegg=(x,y,s=1)=>`<ellipse cx="${x}" cy="${y}" rx="${9*s}" ry="${8*s}" fill="#fffdf6"/><path class="ns" d="M${x-4*s} ${y+1*s} q4 6 8 0 q-4 -2 -8 0z" fill="#ffb31a"/>`;
+const qegg=(x,y,s=1)=>`<ellipse cx="${x}" cy="${y}" rx="${6*s}" ry="${4.6*s}" fill="#fff"/><circle class="ns" cx="${x}" cy="${y}" r="${2.6*s}" fill="#ffc22e"/>`;
+const tom=(x,y,r=4.6)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#e8403c"/><circle class="ns" cx="${x-r*.35}" cy="${y-r*.35}" r="${r*.25}" fill="#fff" opacity=".7"/>`;
+const tomH=(x,y,r=5)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#e8403c"/><circle class="ns" cx="${x}" cy="${y}" r="${r*.6}" fill="#ff8f75"/>${dots([[x-1,y-1],[x+1.5,y+.5],[x-.5,y+1.8]],"#ffe1a8",.7)}`;
+const leaf=(x,y,r=0,c="#6fae3c",s=1)=>`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${r|0}) scale(${s})"><path d="M0 0 q7 -8 16 0 q-9 8 -16 0z" fill="${c}"/><path class="thin" d="M2 0 h11" style="stroke:#3e6b20;stroke-width:1"/></g>`;
+const leaves=(n,cx,cy,R,cols=["#6fae3c","#86c04f","#4f8f2f"],s=1.1)=>scatter(n,cx,cy,R,(x,y)=>leaf(x-8,y,rnd()*360,pick(cols),s));
+const shrimp=(x,y,r=0)=>`<g transform="translate(${x} ${y}) rotate(${r})"><path d="M-6 2 a7 7 0 1 1 9 5" fill="none" style="stroke-width:8"/><path d="M-6 2 a7 7 0 1 1 9 5" fill="none" style="stroke:#f6936c;stroke-width:4.4"/><path d="M3 7 l5 3 l-1 -6z" fill="#f6936c"/></g>`;
+const salmon=(x,y,r=0,w=20,h=12)=>`<g transform="translate(${x} ${y}) rotate(${r})"><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="3" fill="#f68c5a"/><path class="thin" d="M${-w/2+5} ${-h/2+1} l-3 ${h-2} M${-w/2+11} ${-h/2+1} l-3 ${h-2} M${-w/2+17} ${-h/2+1} l-3 ${h-2}" style="stroke:#ffd9c2;stroke-width:1.4"/></g>`;
+const slab=(x,y,r=0,w=24,h=13,c="#7a4430",lc="#3a1a10")=>`<g transform="translate(${x} ${y}) rotate(${r})"><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="${h/2.6}" fill="${c}"/><path class="thin" d="M${-w/2+5} ${h/2-2} l7 ${-h+4} M${-w/2+12} ${h/2-2} l7 ${-h+4} M${-w/2+19} ${h/2-2} l5 ${-h+5}" style="stroke:${lc};stroke-width:1.6"/></g>`;
+const beef=(x,y,r=0,w=24,h=13)=>slab(x,y,r,w,h,"#7a4430","#3a1a10");
+const chick=(x,y,r=0,w=22,h=12)=>slab(x,y,r,w,h,"#e7b46a","#a8692c");
+const strip=(x,y,r=0,c="#7a4430")=>`<rect x="${x-8}" y="${y-2.5}" width="16" height="5" rx="2.5" fill="${c}" transform="rotate(${r|0} ${x} ${y})"/>`;
+const olive=(x,y)=>`<circle cx="${x}" cy="${y}" r="3.6" fill="#2f2b2b"/><circle class="ns" cx="${x}" cy="${y}" r="1.3" fill="#7a5a5a"/>`;
+const cube=(x,y,c="#fffaf0",s=7,r=0)=>`<rect x="${x-s/2}" y="${y-s/2}" width="${s}" height="${s}" rx="1.6" fill="${c}" transform="rotate(${r|0} ${x} ${y})"/>`;
+const brocc=(x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M-2 4 l-2 8 h8 l-2 -8z" fill="#a9d27a"/><circle cx="-5" cy="1" r="5" fill="#4f8f2f"/><circle cx="5" cy="1" r="5" fill="#4f8f2f"/><circle cx="0" cy="-4" r="5.5" fill="#5da03a"/></g>`;
+const mush=(x,y,r=0)=>`<g transform="translate(${x} ${y}) rotate(${r})"><path d="M-6 1 q0 -8 6 -8 q6 0 6 8z" fill="#e7d3b3"/><rect x="-2" y="0" width="4" height="6" rx="1" fill="#f4ead8"/></g>`;
+const dip=(x,y,c="#fffaf0",r=9)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#ece6de"/><circle class="ns" cx="${x}" cy="${y}" r="${r-2.6}" fill="${c}"/>`;
+const bean=(x,y,r=0)=>`<ellipse cx="${x}" cy="${y}" rx="4" ry="2.6" fill="#7cc04f" transform="rotate(${r|0} ${x} ${y})"/>`;
+const drizzle=(d,c)=>`<path d="${d}" fill="none" style="stroke:${c};stroke-width:2.6"/>`;
+const mound=(cx,cy,r,c,fc,n=40)=>`<path d="M${cx-r} ${cy} q-2 ${-r*.9} ${r} ${-r} q${r+2} 0 ${r} ${r} q-2 ${r*.9} ${-r} ${r} q${-r-2} 0 ${-r} ${-r}z" fill="${c}"/>`+(fc?fleck(n,cx,cy,r*.8,fc,1.1):"");
+const ring=(x,y,r,c,ic)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/>${ic?`<circle class="ns" cx="${x}" cy="${y}" r="${r*.55}" fill="${ic}"/>`:""}`;
+const nest=(c="#f3d27a",sauce)=>{let s=sauce?`<path d="M28 63 q2 -27 32 -29 q30 2 32 29 q-2 27 -32 29 q-30 -2 -32 -29z" fill="${sauce}"/>`:"";
+  for(let i=0;i<7;i++){const r=6+i*3.6,d=`M${60-r} 62 a${r} ${(r*.88).toFixed(1)} 0 1 1 ${(r*1.55).toFixed(1)} ${(r*.62).toFixed(1)}`;s+=`<path d="${d}" fill="none" style="stroke-width:5.6"/><path d="${d}" fill="none" style="stroke:${c};stroke-width:3.2"/>`}return s};
+const noodles=(c="#f2dfa6")=>{let s="";for(let y=40;y<=86;y+=7){const hw=Math.sqrt(Math.max(0,33*33-(y-62)**2))-3;if(hw<8)continue;let d=`M${(60-hw).toFixed(1)} ${y}`;const n=Math.max(2,Math.round(hw/6));const step=(2*hw/n).toFixed(1);for(let i=0;i<n;i++)d+=` q${(step/2).toFixed(1)} ${i%2?4:-4} ${step} 0`;s+=`<path d="${d}" fill="none" style="stroke-width:6"/><path d="${d}" fill="none" style="stroke:${c};stroke-width:3.6"/>`}return s};
+
+/* блюда */
+const D={
+ english:()=>P(`<rect x="28" y="70" width="22" height="18" rx="4" fill="#e8b46e" transform="rotate(-12 39 79)"/><rect class="ns" x="31" y="73" width="16" height="12" rx="3" fill="#fbe3b7" transform="rotate(-12 39 79)"/>
+   <rect x="52" y="34" width="34" height="9" rx="4.5" fill="#a5532e" transform="rotate(12 69 38)"/><rect x="50" y="45" width="34" height="9" rx="4.5" fill="#c06a3b" transform="rotate(8 67 49)"/>
+   <path d="M30 44 q8 -10 18 -4 q6 6 -2 12 q-10 4 -16 -8z" fill="#f2a3a8"/>${egg(70,74)}${egg(86,62,.8)}${cube(50,62,"#fff3c8",9,15)}${leaves(4,86,82,4)}`),
+ benedict:()=>P(`<ellipse cx="58" cy="64" rx="30" ry="18" fill="#e3a65a" transform="rotate(-20 58 64)"/><ellipse class="ns" cx="58" cy="64" rx="24" ry="13" fill="#f6d6a0" transform="rotate(-20 58 64)"/>
+   ${[[46,70,-20],[52,64,-30],[60,58,-25]].map(([x,y,r])=>`<path d="M${x-8} ${y} q8 -9 16 0 q-8 6 -16 0z" fill="#a8cf62" transform="rotate(${r} ${x} ${y})"/>`).join("")}${salmon(68,66,-20,18,9)}${pegg(58,62)}
+   ${drizzle("M50 58 q8 6 16 0","#ffd46b")}${tom(86,82)}${tom(30,42,4)}${leaves(4,88,46,4)}`),
+ shakshuka:()=>PAN("#c9362b",`${fleck(30,58,64,30,"#8f1f17",1.4)}${egg(46,58,.95)}${egg(70,72,.95)}${dots([[60,48],[38,74],[80,56],[56,86]],"#4f8f2f",2)}${dip(84,86,"#f3e7c6",7)}`),
+ greenbuck:()=>BOWL("#8a6f4a",`${fleck(60,60,62,32,"#b9976a",1.5)}${drizzle("M36 52 q10 -8 20 0 t20 0","#4f9a3a")}${pegg(48,66,.9)}${pegg(72,70,.9)}${dots([[60,48],[66,52],[40,78],[78,54],[58,84]],"#d9a86a",2.2)}`,"#ece4cf"),
+ oatmeal:()=>BOWL("#f1e0c0",`${[[48,52],[60,48],[72,54],[78,66]].map(([x,y])=>ring(x,y,6,"#fff1a8","#fff8d6")).join("")}${fleck(28,58,70,22,"#7a4a2a",1.2)}`,"#f6ead3"),
+ ricepor:()=>BOWL("#fbf6ec",`${fleck(30,60,62,30,"#efe4cf",1.8)}${berry(52,54,"#d8434f")}${berry(66,50,"#3b4f9a")}${berry(70,66,"#d8434f")}${berry(48,70,"#3b4f9a")}${fleck(14,60,62,26,"#3b2418",1)}`,"#eae3f4"),
+ waffle:()=>P(`<rect x="30" y="38" width="48" height="48" rx="6" fill="#e9b25e" transform="rotate(-10 54 62)"/><path class="thin" d="M38 40 l6 46 M48 38 l6 46 M58 37 l6 46 M68 36 l6 46 M30 50 l48 -8 M31 60 l48 -8 M33 70 l48 -8 M34 80 l48 -8" style="stroke:#b8782f;stroke-width:1.4" transform="rotate(-10 54 62)"/>
+   ${drizzle("M34 52 q14 8 24 -2 q10 -8 20 4","#c76a1f")}<circle cx="74" cy="72" r="12" fill="#fffaf0"/><path class="ns" d="M66 76 q8 4 16 0" fill="#f3e7d0"/>${berry(46,76,"#e53950")}${berry(56,82,"#e53950")}${leaf(80,48,-30,"#5da03a",.9)}`,"#f6e2c9"),
+ syrniki:()=>P(`${[[44,52],[70,50],[56,74]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="13" fill="#e6a24f"/><circle class="ns" cx="${x}" cy="${y}" r="9" fill="#f2c27a"/>`).join("")}${dip(82,78,"#fffaf0",9)}${dip(36,80,"#c8243a",8)}${dots([[48,48],[66,46],[58,70]],"#fff",1.4)}`,"#f7e3cc"),
+ chebureki:()=>P(`${[[44,50,-30],[48,76,40],[74,58,-80]].map(([x,y,r])=>`<g transform="translate(${x} ${y}) rotate(${r})"><path d="M-16 4 q0 -18 16 -18 q16 0 16 18z" fill="#e7b066"/><path class="thin" d="M-15 2 q15 -20 30 0" fill="none" style="stroke:#c08236"/><path class="thin" d="M-14 4 h28" style="stroke-dasharray:2 3"/></g>`).join("")}${dip(80,82,"#fffaf0",9)}`,"#f4e1c6"),
+ nuggets:()=>P(`${[[42,50],[58,44],[44,68],[62,62],[52,82],[72,46]].map(([x,y],i)=>`<path d="M${x-9} ${y} q-1 -8 8 -9 q10 -1 11 7 q1 9 -9 10 q-9 0 -10 -8z" fill="${i%2?"#d9984a":"#e6aa5a"}"/>`).join("")}${fleck(20,55,60,24,"#b0702e",1)}${dip(80,78,"#f3f0d0",10)}${dots([[78,76],[82,80],[80,74]],"#6fae3c",1)}`,"#f6e4c7"),
+ fries:()=>wrap(`${[34,42,50,58,66,74,82].map((x,i)=>`<rect x="${x-3}" y="${22+(i%3)*6}" width="7" height="50" rx="2" fill="${i%2?"#f6c24f":"#f9d066"}" transform="rotate(${(i-3)*4} ${x} 70)"/>`).join("")}<path d="M30 58 h60 l-8 44 h-44z" fill="#d8343a"/><path class="ns" d="M44 74 q16 10 32 0" fill="none" style="stroke:#fff;stroke-width:3;opacity:.8"/>`,"#fbe5c4"),
+ wedges:()=>P(`${[[44,48,20],[60,44,-10],[38,64,70],[52,62,-40],[66,58,30],[46,80,-70],[60,76,10]].map(([x,y,r])=>`<path d="M-11 3 q11 -14 22 0z" fill="#e3a34a" transform="translate(${x} ${y}) rotate(${r})"/>`).join("")}${fleck(16,54,62,24,"#9a5a1e",1)}${dip(82,74,"#d83a2c",9)}`,"#f6e2c2"),
+ cheesesticks:()=>P(`${[[44,48,-25],[50,62,-10],[48,78,10]].map(([x,y,r])=>`<rect x="${x-17}" y="${y-5}" width="34" height="10" rx="5" fill="#e6a24a" transform="rotate(${r} ${x} ${y})"/>`).join("")}<path d="M68 52 q8 2 10 -4 M68 56 q8 4 12 0" fill="none" style="stroke:#ffe9a8;stroke-width:3"/>${fleck(14,48,62,20,"#b06a24",1)}${dip(82,78,"#d83a2c",9)}`,"#f8e6c0"),
+ adzhahuri:()=>PAN("#a8532e",`${[[44,54],[60,48],[72,62],[50,74],[66,80]].map(([x,y],i)=>cube(x,y,"#7a3a22",11,i*20)).join("")}${[[38,66],[58,62],[78,74],[46,84]].map(([x,y],i)=>cube(x,y,"#f2c56e",9,i*30)).join("")}${strip(76,50,30,"#d83a2c")}${strip(36,52,-40,"#7cc04f")}${tom(58,76,4)}${tom(84,62,4)}${dots([[52,58],[68,70],[40,76]],"#4f8f2f",1.6)}`),
+ sudakquinoa:()=>P(`${mound(56,64,26,"#3a3434","#6b6262",50)}<path d="M38 56 q20 -14 44 -2 q4 8 -4 12 q-22 8 -40 -2z" fill="#fff7ee"/><path class="thin" d="M48 54 l4 10 M58 52 l4 12 M68 52 l4 12" style="stroke:#e8d4c0"/>${drizzle("M34 76 q16 8 34 0","#fff3d6")}${[[40,74],[50,80],[70,78],[80,70]].map(([x,y],i)=>bean(x,y,i*40)).join("")}`,"#e8eef2"),
+ chickpan:()=>PAN("#f4ead6",`<path d="M34 60 q4 -20 26 -18 q22 2 22 22 q-4 18 -26 16 q-22 -2 -22 -20z" fill="#d99a4a"/><path class="thin" d="M42 52 l26 22 M50 46 l24 22" style="stroke:#a35f22"/>${drizzle("M38 70 q12 6 24 0 q12 -6 18 4","#fffaf0")}<path d="M72 84 l16 -16 q8 8 0 16z" fill="#f0c674"/>${dots([[76,80],[80,76]],"#4f8f2f",1.3)}`),
+ medallions:()=>P(`${[[46,52],[66,48],[58,70]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="11" fill="#6e3a26"/><path class="thin" d="M${x-6} ${y+4} l8 -10 M${x-1} ${y+6} l8 -10" style="stroke:#3a1a10"/>`).join("")}${drizzle("M38 64 q14 -4 28 4 q10 6 18 -2","#5a2416")}
+   <ellipse cx="80" cy="70" rx="9" ry="4" fill="#9cc96b" transform="rotate(30 80 70)"/><ellipse cx="40" cy="78" rx="9" ry="4" fill="#7a4a8a" transform="rotate(-20 40 78)"/>${strip(74,84,10,"#e8403c")}${strip(82,56,-60,"#f6c24f")}`,"#efe0d4"),
+ chickbulgur:()=>P(`${mound(54,66,26,"#e6c27a","#c79a4a",50)}${chick(52,56,-20)}${chick(62,68,-20)}${drizzle("M36 74 q16 8 34 0","#fff8e8")}${strip(80,56,40,"#e8403c")}${brocc(82,76,.8)}`,"#f3ead6"),
+ stroganoff:()=>P(`${mound(44,64,18,"#fff3d6")}<path class="thin" d="M36 60 q8 -4 16 2" fill="none" style="stroke:#e8d4a8"/><circle class="ns" cx="44" cy="62" r="3" fill="#ffd77a"/>
+   <path d="M60 46 q22 -4 26 14 q2 16 -20 18 q-10 -2 -6 -32z" fill="#f2dcb6"/>${[[68,52,20],[74,62,-10],[66,68,40],[78,70,0]].map(([x,y,r])=>strip(x,y,r,"#7a4430")).join("")}${[[58,82],[72,84]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="6" ry="3" fill="#7aa83a"/>`).join("")}${dots([[48,50],[40,72]],"#4f8f2f",1.4)}`,"#f1e4d2"),
+ salmonrice:()=>P(`${mound(58,66,26,"#2e2a33","#55485e",50)}${salmon(56,60,-10,30,18)}${shrimp(78,72,20)}${shrimp(40,74,-40)}${drizzle("M34 54 q10 -6 20 0","#ff9a2e")}${dots([[70,50],[46,82]],"#4f8f2f",1.5)}`,"#e9e6f0"),
+ sudakbulgur:()=>P(`${mound(56,66,26,"#ecd08e","#c79a4a",50)}<path d="M38 58 q20 -14 44 -2 q4 8 -4 12 q-22 8 -40 -2z" fill="#fff7ee"/><path class="thin" d="M48 56 l4 10 M58 54 l4 12 M68 54 l4 12" style="stroke:#e8d4c0"/>${drizzle("M36 78 q14 6 30 0","#4f9a3a")}${dots([[74,80],[44,82]],"#4f8f2f",2)}`,"#efe9d8"),
+ peppersteak:()=>P(`${beef(52,58,-15,40,24)}${fleck(26,52,58,16,"#1a0d08",1.1)}${brocc(80,72,.9)}${brocc(70,84,.8)}${[[40,80],[48,84],[56,86]].map(([x,y],i)=>bean(x,y,i*30)).join("")}${tom(84,52,4)}${tom(36,44,4)}`,"#efe0d4"),
+ udonbeef:()=>BOWL("#8a4a2a",`${noodles()}${[[44,52,20],[64,48,-20],[74,62,10],[52,74,-30]].map(([x,y,r])=>strip(x,y,r,"#5a2a18")).join("")}${strip(78,76,40,"#e8403c")}${strip(40,66,-60,"#7cc04f")}${fleck(16,60,62,28,"#fff8e0",1)}`,"#f0dccb"),
+ udonchick:()=>BOWL("#b7652e",`${noodles()}${[[44,52,20],[64,48,-20],[72,64,10]].map(([x,y,r])=>chick(x,y,r,16,9)).join("")}${strip(48,76,30,"#f6c24f")}${strip(40,62,-60,"#7cc04f")}${dots([[60,60],[56,66]],"#d83a2c",1.6)}${fleck(14,60,62,28,"#fff8e0",1)}`,"#f6e2cc"),
+ asianbeef:()=>P(`${mound(44,64,18,"#fffaf0","#efe8da",30)}${[[66,50,20],[74,58,-10],[64,64,40],[78,70,0],[68,76,-30]].map(([x,y,r])=>strip(x,y,r,"#6a2e18")).join("")}${drizzle("M58 46 q14 6 24 24","#b84a1e")}${fleck(18,70,62,14,"#fff6dc",1.1)}${dots([[44,58],[46,62]],"#3b2418",1)}`,"#f2e1d2"),
+ colorrice:()=>BOWL("#fffaf0",`${fleck(70,60,62,32,"#f6c24f",1.8)}${fleck(30,60,62,30,"#7cc04f",1.6)}${fleck(30,60,62,30,"#e8403c",1.6)}`,"#f6efd8"),
+ broccoli:()=>BOWL("#eaf3dd",`${brocc(48,54,1.2)}${brocc(70,52,1.1)}${brocc(58,72,1.3)}${brocc(78,72,1)}${brocc(42,74,1)}`,"#e5f0da"),
+ pastashrimp:()=>P(`${nest("#f5d47e","#d6402e")}${shrimp(46,52,10)}${shrimp(72,56,-30)}${shrimp(58,76,60)}${fleck(26,60,62,22,"#fff8e0",1.2)}${leaves(4,62,58,12,["#7cc04f"],.7)}`,"#f8ddd2"),
+ fettuccine:()=>P(`${nest("#f3d58a","#f8ecd0")}${chick(46,54,-20,16,9)}${chick(70,70,20,16,9)}${mush(70,50,10)}${mush(48,74,-20)}${leaves(3,60,62,18,["#3f7a2a"],.8)}${fleck(16,60,62,22,"#fffbe8",1.2)}`,"#f4ead6"),
+ pastasalmon:()=>P(`${nest("#f3d58a","#f8ecd0")}${salmon(48,54,-20,16,10)}${salmon(72,64,20,16,10)}${salmon(56,76,0,14,9)}${leaves(3,60,62,18,["#3f7a2a"],.8)}${fleck(18,58,60,10,"#e8203a",1.6)}`,"#f8e3d8"),
+ bolognese:()=>P(`${nest("#f5d47e")}<path d="M44 52 q16 -12 32 0 q6 14 -6 22 q-16 6 -26 -4 q-6 -10 0 -18z" fill="#9a3a22"/>${fleck(30,60,62,14,"#5a1e10",1.6)}${fleck(14,60,60,12,"#fff6d6",1.2)}${tom(80,76,4.2)}${tom(40,78,4.2)}${leaf(60,44,-90,"#5da03a",.7)}`,"#f6dccf"),
+ nicoise:()=>BOWL("#7fbf4a",`${leaves(16,60,62,26)}${[[46,52,30],[70,72,-40]].map(([x,y,r])=>`<path d="M-9 3 q9 -12 18 0z" fill="#f2c56e" transform="translate(${x} ${y}) rotate(${r})"/>`).join("")}${tomH(68,50)}${tomH(48,76)}${olive(58,62)}${olive(80,60)}${olive(42,64)}${qegg(60,80)}${qegg(76,44)}`),
+ eggplant:()=>BOWL("#86c04f",`${leaves(10,60,62,26,["#4f8f2f","#6fae3c"])}${[[48,52],[66,50],[58,68],[44,72],[76,66]].map(([x,y],i)=>`<rect x="${x-7}" y="${y-5}" width="14" height="10" rx="4" fill="#5a2a5e" transform="rotate(${i*35} ${x} ${y})"/><rect class="ns" x="${x-4}" y="${y-2}" width="8" height="4" rx="2" fill="#e6b36a" transform="rotate(${i*35} ${x} ${y})"/>`).join("")}${tomH(80,52)}${tomH(40,60)}${drizzle("M44 62 q8 -6 16 0 t16 0","#fff8e8")}${fleck(20,60,62,24,"#fff6dc",1)}`),
+ caesar:()=>BOWL("#9ccb5c",`${leaves(14,60,62,26,["#8fcf55","#b5dc7a","#6fae3c"],1.2)}${chick(50,54,-20,18,10)}${chick(70,66,20,18,10)}${qegg(46,74)}${qegg(74,48)}${[[60,82],[82,74],[38,58]].map(([x,y],i)=>cube(x,y,"#e9b25e",7,i*25)).join("")}${fleck(22,60,62,24,"#fffbe6",1.3)}`),
+ caesarshrimp:()=>BOWL("#9ccb5c",`${leaves(14,60,62,26,["#8fcf55","#b5dc7a","#6fae3c"],1.2)}${shrimp(48,54,0)}${shrimp(70,64,50)}${shrimp(56,78,-30)}${qegg(76,46)}${qegg(40,70)}${fleck(22,60,62,24,"#fffbe6",1.3)}`),
+ greek:()=>BOWL("#7fbf4a",`${[[46,50],[72,74],[56,80]].map(([x,y])=>ring(x,y,6,"#5aa03a","#d8efb8")).join("")}${tomH(64,50)}${tomH(44,70)}${strip(78,58,40,"#f6c24f")}${strip(36,58,-30,"#e8403c")}${olive(58,64)}${olive(76,44)}${olive(52,88)}${cube(66,66,"#fffdf6",10,15)}${cube(48,58,"#fffdf6",9,-10)}${cube(80,70,"#fffdf6",8,30)}`),
+ beet:()=>BOWL("#6fae3c",`${leaves(10,60,62,26,["#4f8f2f","#6fae3c"])}${[[48,52],[66,48],[58,66],[44,72],[74,70],[62,82]].map(([x,y],i)=>cube(x,y,"#8a1f4a",9,i*20)).join("")}${[[56,54],[72,60],[46,64],[66,76]].map(([x,y],i)=>cube(x,y,"#fffdf6",7,i*30)).join("")}${[[80,52,20],[38,58,-40]].map(([x,y,r])=>`<path d="M-6 0 q6 -7 12 0 q-6 4 -12 0z" fill="#ff9a2e" transform="translate(${x} ${y}) rotate(${r})"/>`).join("")}${fleck(10,60,62,24,"#f2e2b0",1.5)}${drizzle("M44 60 q10 8 24 0","#a8122e")}`),
+ caprese:()=>BOWL("#86c04f",`${leaves(10,60,62,26,["#4f8f2f","#6fae3c"])}${[[46,52],[70,52],[58,70],[42,72],[76,72]].map(([x,y])=>tom(x,y,5.4)).join("")}${[[58,50],[48,64],[70,64],[60,84]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5.6" fill="#fffdf6"/>`).join("")}${drizzle("M38 60 q12 -8 22 0 t22 0","#3f7a2a")}${drizzle("M42 80 q14 4 30 -4","#5a2416")}`),
+ asiansalad:()=>BOWL("#86c04f",`${[[44,50,30],[54,46,10],[70,50,-20],[78,62,60],[40,66,-50],[66,80,20],[50,82,-10]].map(([x,y,r],i)=>strip(x,y,r,["#e8403c","#f6c24f","#ff9a2e","#5aa03a","#fff6dc"][i%5])).join("")}${[[56,58,20],[64,66,-30],[54,70,60],[70,58,0]].map(([x,y,r])=>strip(x,y,r,"#6a2e18")).join("")}${fleck(18,60,62,24,"#fff6dc",1.1)}${dots([[60,62],[66,74]],"#d83a2c",1.4)}`),
+ olivier:()=>P(`${mound(60,64,28,"#f3e6c0")}${scatter(26,60,64,22,(x,y,i)=>cube(x,y,["#f0d9a8","#ffb36a","#e8e0c0","#c29a6a"][i%4],5,i*17))}${fleck(16,60,64,22,"#6fae3c",2)}${leaf(54,42,-60,"#4f8f2f",.8)}`,"#f1eadb"),
+};
+const pizza=(top,cheese="#ffd77a",bg="#f6dcc8")=>wrap(`<circle cx="60" cy="62" r="45" fill="#e3a65a"/><circle cx="60" cy="62" r="37" fill="#d9472f"/><circle class="ns" cx="60" cy="62" r="34" fill="${cheese}"/>${fleck(14,60,62,30,"#e0603a",2)}<path class="thin" d="M60 25 v74 M23 62 h74 M34 36 l52 52 M86 36 l-52 52" style="stroke:#c98a3f;stroke-opacity:.5"/>${top}`,bg);
+Object.assign(D,{
+ p4cheese:()=>pizza(`${scatter(12,60,62,28,(x,y,i)=>`<circle class="ns" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${4+i%3}" fill="${["#fff8e0","#f6c24f","#c9d6e8"][i%3]}"/>`)}${fleck(16,60,62,28,"#5a6fa0",1.2)}`),
+ psalmon:()=>pizza(`${scatter(8,60,62,24,(x,y)=>salmon(x.toFixed(1),y.toFixed(1),(rnd()*180)|0,12,8))}${scatter(10,60,62,28,(x,y)=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.4" fill="#fffdf6"/>`)}`,"#fff0c8"),
+ ppepperoni:()=>pizza(`${scatter(11,60,62,26,(x,y)=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="#b82a22"/><circle class="ns" cx="${(x-1.5).toFixed(1)}" cy="${(y-1.5).toFixed(1)}" r="1.4" fill="#e8665a"/>`)}${tom(46,46,3.6)}${tom(76,76,3.6)}`),
+ pbolognese:()=>pizza(`${fleck(60,60,62,30,"#7a3a22",2)}${scatter(8,60,62,26,(x,y)=>ring(x.toFixed(1),y.toFixed(1),4,"#4f9a3a","#d8efb8"))}`),
+ pchicken:()=>pizza(`${scatter(10,60,62,26,(x,y,i)=>cube(x.toFixed(1),y.toFixed(1),"#b8743a",7,i*23))}${tom(48,50,4)}${tom(72,70,4)}${tom(70,46,4)}${tom(46,76,4)}${drizzle("M36 62 q12 -6 24 0 t24 0","#fffaf0")}`),
+ pmargherita:()=>pizza(`${[[46,48],[74,50],[60,64],[44,76],[76,78]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="7" fill="#fffaf0"/>`).join("")}${[[58,46],[70,66],[50,62],[62,82]].map(([x,y])=>leaf(x-6,y,rnd()*360,"#3f8f2f",.8)).join("")}${drizzle("M38 56 q6 6 12 0","#3f7a2a")}`),
+ ksoup:()=>BOWL("#f6d77a",`${noodles("#fff3c8")}${[[48,52],[70,58],[56,74]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="6.5" fill="#a0603a"/><circle class="ns" cx="${x-2}" cy="${y-2}" r="1.6" fill="#d9a07a"/>`).join("")}${qegg(74,76)}${dots([[60,46],[42,68],[80,46]],"#4f8f2f",1.8)}${strip(64,84,10,"#ff9a2e")}`,"#fbecc8"),
+ kschnitzel:()=>P(`${mound(72,70,16,"#fff3d6")}${drizzle("M64 66 q8 6 16 0","#f6c24f")}<path d="M28 54 q4 -16 22 -14 q14 2 12 18 q-2 18 -18 18 q-18 -2 -16 -22z" fill="#d9984a"/>${fleck(26,44,60,14,"#a8692c",1.3)}${dots([[78,52],[82,56]],"#4f8f2f",1.6)}`,"#f8e6c8"),
+ kmeatballs:()=>P(`${mound(56,66,24,"#fff3d6")}${drizzle("M40 62 q16 10 32 0","#f6c24f")}${[[50,58],[64,56],[58,72],[46,72],[70,70]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="7" fill="#b06a40"/><circle class="ns" cx="${x-2}" cy="${y-2}" r="1.8" fill="#e0a07a"/>`).join("")}${dots([[60,46],[76,58]],"#4f8f2f",1.8)}`,"#f3e3d0"),
+ kfruit:()=>wrap(`<path d="M24 52 h72 q-4 34 -36 38 q-32 -4 -36 -38z" fill="#eaf6fb"/><path d="M50 90 h20 l4 10 h-28z" fill="#eaf6fb"/>
+   ${scatter(16,60,48,20,(x,y,i)=>i%4===0?`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="#6a2e7a"/>`:cube(x.toFixed(1),y.toFixed(1),["#ff9a2e","#b5dc5a","#fff2a8","#e8403c"][i%4],8,i*25))}<path d="M24 52 q36 10 72 0" fill="#fffdf6"/>${leaf(62,30,-60,"#3f8f2f",.9)}`,"#e4f2ea"),
+ kicecream:()=>wrap(`<path d="M36 62 h48 q-2 22 -24 24 q-22 -2 -24 -24z" fill="#fff"/><path d="M52 86 h16 l3 12 h-22z" fill="#fff"/>
+   <circle cx="48" cy="56" r="12" fill="#ffd6e0"/><circle cx="72" cy="56" r="12" fill="#fff6dc"/><circle cx="60" cy="42" r="12" fill="#8a5a3c"/>${dots([[56,38],[64,40],[60,46],[46,52],[74,54]],"#f6c24f",1.4)}${berry(66,32,"#d8434f")}`,"#fde2e8"),
+});
+const hashId=s=>{let h=7;for(const c of s)h=(h*31+c.charCodeAt(0))%2147483646;return h+1};
+const artOf=it=>{seed=hashId(it.id);return D[it.art]()};
+
+function heroCake(){return `<svg class="hero-cake" viewBox="0 0 240 210" aria-hidden="true"><g class="ink" filter="url(#sk)">
+  <ellipse cx="120" cy="186" rx="104" ry="16" fill="#fff"/>
+  <path d="M38 128 h164 v46 q0 10 -82 10 q-82 0 -82 -10z" fill="#f6c9c4"/>
+  <path d="M38 128 h164 v12 q-6 10 -12 0 q-6 16 -14 2 q-8 12 -14 0 q-8 18 -16 2 q-8 10 -14 0 q-8 14 -16 0 q-8 12 -14 0 q-8 16 -16 2 q-8 10 -14 0 q-6 14 -14 0 q-6 8 -10 2z" fill="#5a3322"/>
+  <text class="ns" x="120" y="168" text-anchor="middle" font-family="Playfair Display,serif" font-style="italic" font-size="24" fill="#c79a55">Мадлена</text>
+  <path d="M68 92 h104 v36 h-104z" fill="#fffaf2"/>
+  <path d="M68 92 h104 v8 q-5 9 -10 0 q-5 12 -11 1 q-6 9 -11 0 q-6 13 -12 1 q-6 8 -11 0 q-6 12 -12 0 q-5 9 -10 0 q-6 11 -11 0 q-4 6 -6 1z" fill="#f4a6b5"/>
+  ${[[82,90],[104,88],[136,88],[158,90]].map(([x,y])=>berry(x,y)).join("")}
+  <rect x="115" y="58" width="10" height="32" rx="2" fill="#fff"/><path class="thin" d="M115 64 l10 -4 M115 72 l10 -4 M115 80 l10 -4 M115 88 l10 -4" style="stroke:#d86f7a"/>
+  <path class="flame" d="M120 36 q10 12 0 20 q-10 -8 0 -20z" fill="#ffb238"/>
+  ${dots([[50,150],[70,160],[90,152],[150,156],[176,148],[190,162],[60,170]],"#fff",2)}
+</g></svg>`}
+
+/* ================== МЕНЮ ================== */
+const I=(id,name,desc,price,art,tags=[])=>({id,name,desc,price,art:art||id,tags});
+const MENU=[
+ {id:"breakfast",title:"Завтраки",note:"Подаём весь день",items:[
+  I("english","Английский завтрак","Сытный классический завтрак с охотничьими колбасками, копчёной колбасой, ветчиной, сосиской, яйцами и сулугуни. Подаётся со свежим хлебом, сливочным маслом и микс-салатом.",2500),
+  I("benedict","Завтрак Бенедикт","Хрустящий багет с авокадо, сёмгой, яйцом пашот и соусом голландез. Дополняется рукколой и томатами черри.",2300),
+  I("shakshuka","Шакшука","Томлёные томаты со специями и двумя яйцами, подаются с хумусом, гуакамоле, греческим йогуртом и свежим хлебом.",1500),
+  I("greenbuck","Зелёная гречка с яйцом пашот","Гречка в сливочном соусе с ароматным песто, двумя яйцами пашот и ореховым миксом.",2400),
+  I("oatmeal","Овсяная каша с бананом и семенами льна","Нежная овсяная каша на молоке с бананом и семенами льна.",1300),
+  I("ricepor","Рисовая каша с ягодами","Кремовая рисовая каша на молоке со свежими ягодами и миксом семян.",1300),
+  I("waffle","Бельгийская вафля с солёной карамелью","Воздушная бельгийская вафля с шариком мороженого, свежей клубникой и солёной карамелью.",2400),
+  I("syrniki","Творожные сырники (3 шт)","Нежные домашние сырники с румяной корочкой. Подаются со сметаной и вареньем.",1700),
+ ]},
+ {id:"snacks",title:"Закуски",items:[
+  I("chebureki","Чебуреки с говядиной","Хрустящие золотистые чебуреки с сочной говяжьей начинкой и сметанным соусом.",2000),
+  I("nuggets","Куриные наггетсы","Хрустящие куриные наггетсы с соусом тартар.",1600),
+  I("fries","Картофель фри","Золотистый картофель фри с кетчупом.",800),
+  I("wedges","Картофельные дольки","Ароматные картофельные дольки с хрустящей корочкой и кетчупом.",800),
+  I("cheesesticks","Сырные палочки","Тянущиеся сырные палочки в хрустящей панировке.",1500),
+ ]},
+ {id:"salads",title:"Салаты",items:[
+  I("nicoise","Нисуаз","Микс свежих салатов, картофельные дольки, томаты черри, маслины, перепелиные яйца и фирменная заправка.",3400),
+  I("eggplant","Хрустящие баклажаны","Обжаренные баклажаны с томатами черри, рукколой, креметте и кунжутом.",2900),
+  I("caesar","Цезарь с курицей","Классический салат с куриным филе, перепелиными яйцами, пармезаном и фирменным соусом Цезарь.",3200),
+  I("caesarshrimp","Цезарь с креветками","Лёгкий салат с тигровыми креветками, перепелиными яйцами, пармезаном и соусом Цезарь.",3400),
+  I("greek","Греческий салат","Свежие овощи, маслины и сыр фета под ароматной прованской заправкой.",2600),
+  I("beet","Свекольный салат с мандариновой ноткой","Запечённая свёкла, сыр фета, кедровые орехи и гранатовый соус с лёгкими цитрусовыми акцентами.",2900),
+  I("caprese","Капрезе с мини-моцареллой","Томаты черри, мини-моцарелла, руккола и соус песто с бальзамическим кремом.",3200),
+  I("asiansalad","Азиатский салат с говядиной","Сочная говядина, свежие овощи и пикантная корейская заправка.",3400,null,["spicy"]),
+  I("olivier","Оливье с говядиной","Домашний оливье с отварной говядиной, свежими овощами и нежной заправкой.",2700),
+ ]},
+ {id:"mains",title:"Основные блюда",items:[
+  I("adzhahuri","Аджахури","Сочное жаркое из говядины с картофелем, перцем, томатами черри и грузинскими специями.",3100),
+  I("sudakquinoa","Судак с чёрным киноа","Филе судака на подушке из чёрного киноа в сливочном соусе с эдамаме.",3500),
+  I("chickpan","Курица на жаровне","Маринованное куриное бедро под сливочным соусом бешамель с домашней фокаччей.",2400),
+  I("medallions","Медальоны с овощами гриль","Нежные медальоны с цукини, баклажанами и болгарским перцем под соусом демиглас.",4100),
+  I("chickbulgur","Куриная грудка с булгуром","Сочная куриная грудка с булгуром и овощами под нежным сливочным соусом.",3000),
+  I("stroganoff","Бефстроганов с картофельным пюре","Нежная говяжья вырезка в сливочном соусе с корнишонами и воздушным картофельным пюре.",3100),
+  I("salmonrice","Сёмга с чёрным рисом и креветками","Стейк сёмги с тигровыми креветками и цитрусовым апельсиновым соусом.",4300),
+  I("sudakbulgur","Томлёный судак со сливочным булгуром","Нежное филе судака со сливочным булгуром и ароматом песто.",3100),
+  I("peppersteak","Пеппер-стейк","Сочный говяжий стейк с брокколи, эдамаме, томатами черри и перечным акцентом.",3500),
+  I("udonbeef","Удон с говядиной","Пшеничная лапша удон с сочной говядиной, овощами, имбирём и фирменным азиатским соусом.",2800),
+  I("udonchick","Удон с курицей","Лапша удон с куриным филе, овощами и пикантным соусом в азиатском стиле.",2400,null,["spicy"]),
+  I("asianbeef","Говядина в азиатском стиле","Нежная говядина в ароматном азиатском соусе с рисом и кунжутом.",3600),
+ ]},
+ {id:"sides",title:"Гарниры",items:[
+  I("colorrice","Цветной рис","Гарнир к любому основному блюду.",800),
+  I("broccoli","Брокколи","Гарнир к любому основному блюду.",800),
+ ]},
+ {id:"pasta",title:"Паста",items:[
+  I("pastashrimp","Паста с креветками","Спагетти в томатном соусе с тигровыми креветками, пармезаном и микрозеленью.",3400),
+  I("fettuccine","Феттучини с курицей","Феттучини в сливочном соусе с куриным филе, шампиньонами, шпинатом и пармезаном.",2800),
+  I("pastasalmon","Паста с сёмгой","Феттучини в сливочном соусе с сёмгой, шпинатом, пармезаном и красной икрой.",3300),
+  I("bolognese","Паста Болоньезе","Классическая итальянская паста с насыщенным мясным соусом болоньезе, пармезаном и томатами черри.",2600),
+ ]},
+ {id:"pizza",title:"Пицца",items:[
+  I("p4cheese","Пицца «Четыре сыра»","Сочетание моцареллы, гауды, пармезана и дор блю на тонком тесте с фирменным соусом.",3200),
+  I("psalmon","Пицца с сёмгой","Нежная сёмга, моцарелла и сливочный творожный сыр на тонкой основе.",3300),
+  I("ppepperoni","Пицца Пепперони","Моцарелла, пикантная салями и томаты черри.",3300),
+  I("pbolognese","Пицца Болоньезе","Сочная говядина, моцарелла и острый халапеньо для любителей ярких вкусов.",3000,null,["spicy"]),
+  I("pchicken","Пицца с копчёной курицей","Копчёная куриная грудка, моцарелла и томаты черри под сливочным соусом.",3000),
+  I("pmargherita","Пицца Маргарита","Классическая итальянская пицца с моцареллой, томатами и соусом песто.",2400),
+ ]},
+ {id:"kids",title:"Детское меню",items:[
+  I("ksoup","Суп с фрикадельками","Лёгкий домашний бульон с лапшой, нежными фрикадельками и перепелиным яйцом.",1200,null,["kids"]),
+  I("kschnitzel","Шницель с сырным пюре","Хрустящий куриный шницель с нежным картофельным пюре и сырным соусом.",2600,null,["kids"]),
+  I("kmeatballs","Фрикадельки с сырным пюре","Домашние фрикадельки с воздушным картофельным пюре и сырным соусом.",1500,null,["kids"]),
+  I("kfruit","Фруктовый салат с йогуртом","Яблоко, груша, апельсин, киви, банан, виноград и фруктовый йогурт.",1300,null,["kids"]),
+  I("kicecream","Мороженое в ассортименте","Спросите у официанта, какие вкусы есть сегодня.",700,null,["kids"]),
+ ]},
+];
+const ITEMS=MENU.flatMap(s=>s.items);
+const BY=Object.fromEntries(ITEMS.map(i=>[i.id,i]));
+const TAGS={spicy:["spicy","острое"],kids:["kids","детям"]};
+const fmt=n=>n.toLocaleString("ru-RU")+" ₸";
+const $=s=>document.querySelector(s);
+
+/* ================== КОРЗИНА ================== */
+let cart={};
+try{cart=JSON.parse(localStorage.getItem("madlena-cart")||"{}")||{}}catch(e){cart={}}
+const save=()=>{try{localStorage.setItem("madlena-cart",JSON.stringify(cart))}catch(e){}};
+const qty=id=>cart[id]||0;
+const ctlHTML=id=>qty(id)?`<div class="step"><button data-dec="${id}" aria-label="Меньше">−</button><span>${qty(id)}</span><button data-inc="${id}" aria-label="Больше">+</button></div>`:`<button class="add" data-inc="${id}" aria-label="Добавить">+</button>`;
+function setQty(id,q,from){
+  const before=qty(id); q=Math.max(0,Math.min(99,q));
+  if(q)cart[id]=q;else delete cart[id];save();
+  document.querySelectorAll(`[data-ctl="${id}"]`).forEach(el=>el.innerHTML=ctlHTML(id));
+  updateBar(q>before);
+  if(q>before&&from)flyToBar(from);
+  if($("#cartSheet"))renderCart();
+}
+function bill(){const s=totals().s,fee=order.mode==="table"?Math.round(s*0.1):0;return{s,fee,t:s+fee}}
+function totals(){let c=0,s=0;for(const[id,q]of Object.entries(cart)){if(!BY[id])continue;c+=q;s+=q*BY[id].price}return{c,s}}
+function updateBar(bump){
+  if(!ORDER_MODE)return;const{c,s}=totals();const bar=$("#bar");
+  bar.classList.toggle("show",c>0);$("#barCount").textContent=c;$("#barSum").textContent=fmt(s)+" →";
+  if(bump){bar.classList.remove("bump");void bar.offsetWidth;bar.classList.add("bump")}
+}
+function flyToBar(el){
+  const a=el.getBoundingClientRect(),b=$("#barCount").getBoundingClientRect();const d=document.createElement("div");d.className="dot";document.body.appendChild(d);
+  const x0=a.left+a.width/2-8,y0=a.top+a.height/2-8,x1=b.left+b.width/2-8,y1=(b.top>innerHeight?innerHeight-50:b.top+b.height/2-8);
+  d.animate([{transform:`translate(${x0}px,${y0}px) scale(1)`},{transform:`translate(${(x0+x1)/2}px,${Math.min(y0,y1)-90}px) scale(1.3)`,offset:.5},{transform:`translate(${x1}px,${y1}px) scale(.4)`}],{duration:650,easing:"cubic-bezier(.3,.7,.4,1)"}).onfinish=()=>d.remove();
+  d.style.left=0;d.style.top=0;
+}
+
+/* ================== РЕНДЕР ================== */
+function render(){
+  $("#heroCake").innerHTML=heroCake();
+  $("#chips").innerHTML=MENU.map(s=>`<button class="chip" data-go="${s.id}">${s.title}</button>`).join("");
+  $("#menu-start").innerHTML=MENU.map(s=>`<section id="${s.id}"><div class="sec-head"><h2>${s.title}</h2><span class="line"></span></div>${s.note?`<p class="sec-note">${s.note}</p>`:""}
+    <div class="grid">${s.items.map(card).join("")}</div></section>`).join("");
+  updateBar(false);
+}
+function card(it){
+  return `<article class="card" data-open="${it.id}"><div class="tags">${it.tags.map(t=>`<span class="tag ${TAGS[t][0]}">${TAGS[t][1]}</span>`).join("")}</div>
+    <div class="art">${artOf(it)}</div><h3>${it.name}</h3><p>${it.desc}</p>
+    <div class="bottom"><span class="price">${fmt(it.price)}</span>${ORDER_MODE?`<div data-ctl="${it.id}">${ctlHTML(it.id)}</div>`:""}</div></article>`;
+}
+
+/* sheet */
+let closeCurrent=null;
+function openSheet(html,id){
+  if(closeCurrent)closeCurrent(true);
+  const back=document.createElement("div");back.className="back";
+  const sh=document.createElement("div");sh.className="sheet";if(id)sh.id=id;
+  sh.innerHTML=`<div class="grab"></div><button class="x" aria-label="Закрыть">×</button>`+html;
+  document.body.append(back,sh);requestAnimationFrame(()=>{back.classList.add("show");sh.classList.add("show")});
+  const close=(fast)=>{back.classList.remove("show");sh.classList.remove("show");closeCurrent=null;setTimeout(()=>{back.remove();sh.remove()},fast?0:450)};
+  back.onclick=()=>close();sh.querySelector(".x").onclick=()=>close();closeCurrent=close;return sh;
+}
+addEventListener("keydown",e=>{if(e.key==="Escape"&&closeCurrent)closeCurrent()});
+
+function openItem(id){
+  const it=BY[id];
+  openSheet(`<div class="big">${artOf(it)}</div><h3>${it.name}</h3><p class="lead">${it.desc}</p>
+    <div class="buy"><span class="price">${fmt(it.price)}</span>${ORDER_MODE?`<div data-ctl="${id}">${ctlHTML(id)}</div>`:`<span style="color:var(--choco2);font-size:14px">Закажите у официанта</span>`}</div>`);
+}
+
+/* удиви меня */
+function surprise(){
+  const sh=openSheet(`<div class="spin"><div class="kicker">сегодня вам —</div><div class="spin-art"></div><h3 class="spin-name">…</h3><div class="spin-more"></div></div>`);
+  const artEl=sh.querySelector(".spin-art"),nm=sh.querySelector(".spin-name");let n=0,delay=55,last;
+  const step=()=>{let it;do{it=ITEMS[Math.floor(Math.random()*ITEMS.length)]}while(it===last);last=it;artEl.innerHTML=artOf(it);nm.textContent=it.name;
+    if(++n<16){delay*=1.16;setTimeout(()=>sh.isConnected&&step(),delay)}else done(it)};
+  const done=it=>{sh.querySelector(".spin").classList.add("done");const r=artEl.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2);
+    sh.querySelector(".spin-more").innerHTML=`<p class="lead">${it.desc}</p><div class="hero-actions"><button class="btn btn-dark" data-open="${it.id}">Подробнее · ${fmt(it.price)}</button>${ORDER_MODE?`<button class="btn btn-light" data-inc="${it.id}">+ В заказ</button>`:""}</div>`};
+  step();
+}
+
+/* корзина */
+let order={mode:"table",table:"",time:"",address:"",name:"",comment:""};
+function cartText(){
+  const lines=Object.entries(cart).filter(([id])=>BY[id]).map(([id,q])=>`• ${BY[id].name} × ${q} — ${fmt(BY[id].price*q)}`);
+  const how=order.mode==="table"?`За столиком № ${order.table}`:order.mode==="pickup"?`Самовывоз${order.time?`, к ${order.time}`:""}`:`Доставка: ${order.address}`;
+  return `Здравствуйте! Заказ из меню «Мадлена»:\n${lines.join("\n")}\n\n${(()=>{const b=bill();return b.fee?`Блюда: ${fmt(b.s)}\nОбслуживание 10%: ${fmt(b.fee)}\nИтого: ${fmt(b.t)}`:`Итого: ${fmt(b.t)}`})()}\n${how}${order.name?`\nИмя: ${order.name}`:""}${order.comment?`\nКомментарий: ${order.comment}`:""}`;
+}
+function openCart(){openSheet(`<h3>Ваш заказ</h3><div id="cartBody"></div>`,"cartSheet");renderCart()}
+function renderCart(){
+  const body=$("#cartBody");if(!body)return;const ids=Object.keys(cart).filter(id=>BY[id]);
+  if(!ids.length){body.innerHTML=`<p class="lead">Пока пусто. Нажмите «+» у любого блюда 🍽</p>`;return}
+  const extra=order.mode==="table"?`<label class="field" id="f-req"><span>Номер столика</span><input inputmode="numeric" data-o="table" value="${order.table}" placeholder="например, 5"></label>`
+    :order.mode==="pickup"?`<label class="field"><span>Ко скольки подойдёте (необязательно)</span><input data-o="time" value="${order.time}" placeholder="например, 18:30"></label>`
+    :`<label class="field" id="f-req"><span>Адрес доставки</span><input data-o="address" value="${order.address}" placeholder="улица, дом, квартира"></label>`;
+  body.innerHTML=ids.map(id=>`<div class="line-item"><div class="mini">${artOf(BY[id])}</div><div class="nm">${BY[id].name}<small>${fmt(BY[id].price)}</small></div><div data-ctl="${id}">${ctlHTML(id)}</div></div>`).join("")+
+   `<div class="seg">${[["table","За столиком"],["pickup","Самовывоз"],["delivery","Доставка"]].map(([k,t])=>`<button data-mode="${k}" class="${order.mode===k?"on":""}">${t}</button>`).join("")}</div>
+    ${extra}<label class="field"><span>Ваше имя</span><input data-o="name" value="${order.name}" placeholder="как к вам обращаться" autocomplete="given-name"></label>
+    <label class="field"><span>Комментарий</span><input data-o="comment" value="${order.comment}" placeholder="например, без лука / с собой"></label>
+    ${(()=>{const b=bill();return (b.fee?`<div class="sub-row"><span>Блюда</span><span>${fmt(b.s)}</span></div><div class="sub-row"><span>Обслуживание 10%</span><span>${fmt(b.fee)}</span></div>`:"")+`<div class="total"><span>Итого</span><span>${fmt(b.t)}</span></div>`})()}
+    <div class="actions"><a class="btn btn-wa" id="waBtn" target="_blank" rel="noopener" href="#">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.6 14.2c-.2.7-1.4 1.3-2 1.4-.5 0-1.1.1-3.4-.9-2.9-1.2-4.7-4.1-4.8-4.3-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.4.1.1.1.7-.1 1.3z"/></svg>
+      Отправить заказ в WhatsApp</a>
+      <a class="btn btn-light" href="tel:+${PHONE_DIGITS}">📞 Позвонить и продиктовать</a>
+      <button class="btn btn-light" id="copyBtn">📋 Скопировать заказ</button></div>
+    <p class="phone-note">Номер кафе: <b>${PHONE}</b></p>`;
+  syncWa();
+}
+function valid(){const need=order.mode==="table"?order.table.trim():order.mode==="delivery"?order.address.trim():"ok";return !!need}
+function syncWa(){const a=$("#waBtn");if(a)a.href=`https://wa.me/${PHONE_DIGITS}?text=${encodeURIComponent(cartText())}`}
+
+/* ================== СОБЫТИЯ ================== */
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-inc],[data-dec],[data-open],[data-go],[data-mode],#surpriseBtn,#bar,#waBtn,#copyBtn");if(!t)return;
+  if(t.dataset.inc){e.stopPropagation();setQty(t.dataset.inc,qty(t.dataset.inc)+1,t);return}
+  if(t.dataset.dec){e.stopPropagation();setQty(t.dataset.dec,qty(t.dataset.dec)-1);return}
+  if(t.dataset.go){document.getElementById(t.dataset.go).scrollIntoView({behavior:"smooth"});return}
+  if(t.dataset.mode){order.mode=t.dataset.mode;renderCart();return}
+  if(t.id==="surpriseBtn")return surprise();
+  if(t.id==="bar")return openCart();
+  if(t.id==="waBtn"){if(!valid()){e.preventDefault();const f=$("#f-req");f.classList.remove("err");void f.offsetWidth;f.classList.add("err");f.querySelector("input").focus();toast(order.mode==="table"?"Укажите номер столика":"Укажите адрес доставки")}else toast("Открываем WhatsApp — останется нажать «Отправить»");return}
+  if(t.id==="copyBtn"){try{navigator.clipboard.writeText(cartText()).then(()=>toast("Заказ скопирован"),()=>toast("Не получилось скопировать"))}catch(err){toast("Не получилось скопировать")}return}
+  if(t.dataset.open){const c=t.closest(".card");if(c){c.classList.remove("jelly");void c.offsetWidth;c.classList.add("jelly");setTimeout(()=>openItem(t.dataset.open),180)}else openItem(t.dataset.open)}
+});
+document.addEventListener("input",e=>{const k=e.target.dataset.o;if(k){order[k]=e.target.value;e.target.closest(".field").classList.remove("err");syncWa()}});
+
+let tt;function toast(m){const el=$("#toast");el.textContent=m;el.classList.add("show");clearTimeout(tt);tt=setTimeout(()=>el.classList.remove("show"),2400)}
+
+/* появление карточек + активная категория */
+function observe(){
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const el=en.target;const i=[...el.parentNode.children].indexOf(el);el.style.transitionDelay=(i%2)*90+"ms";el.classList.add("in");io.unobserve(el)}}),{threshold:.12});
+  document.querySelectorAll(".card").forEach(c=>io.observe(c));
+  const spy=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("on",c.dataset.go===en.target.id));const on=document.querySelector(".chip.on");if(on){const row=$("#chips");row.scrollTo({left:on.offsetLeft-row.clientWidth/2+on.clientWidth/2,behavior:"smooth"})}}}),{rootMargin:"-45% 0px -50% 0px"});
+  document.querySelectorAll("section").forEach(s=>spy.observe(s));
+}
+
+/* посыпка в шапке + конфетти */
+const COLORS=["#f4a6b5","#a8d8c0","#c8b3e6","#ffd36e","#ffffff","#d86f7a"];
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function sprinkles(){
+  const cv=$("#sprinkles"),ctx=cv.getContext("2d");let W,H,run=true;const dpr=Math.min(devicePixelRatio||1,2);
+  const size=()=>{W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)};size();addEventListener("resize",size);
+  const P=Array.from({length:Math.round(Math.min(46,W/9))},()=>({x:Math.random()*W,y:Math.random()*H,v:.25+Math.random()*.5,r:Math.random()*6,s:(Math.random()-.5)*.04,c:COLORS[Math.random()*COLORS.length|0],w:2.6+Math.random()*2}));
+  new IntersectionObserver(([en])=>{run=en.isIntersecting;if(run)loop()}).observe(cv);
+  function loop(){if(!run)return;ctx.clearRect(0,0,W,H);for(const p of P){p.y+=p.v;p.r+=p.s;if(p.y>H+10){p.y=-10;p.x=Math.random()*W}ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.globalAlpha=.85;ctx.beginPath();ctx.roundRect?ctx.roundRect(-p.w*2,-p.w/2,p.w*4,p.w,p.w/2):ctx.rect(-p.w*2,-p.w/2,p.w*4,p.w);ctx.fill();ctx.restore()}requestAnimationFrame(loop)}
+  if(!reduce)loop();
+}
+function burst(x,y){
+  if(reduce)return;const cv=$("#fx"),ctx=cv.getContext("2d"),dpr=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  const P=Array.from({length:70},()=>{const a=Math.random()*Math.PI*2,s=3+Math.random()*7;return{x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-4,r:Math.random()*6,c:COLORS[Math.random()*COLORS.length|0],l:1}});
+  (function f(){ctx.clearRect(0,0,innerWidth,innerHeight);let alive=false;for(const p of P){p.vy+=.25;p.x+=p.vx;p.y+=p.vy;p.vx*=.98;p.r+=.2;p.l-=.014;if(p.l>0){alive=true;ctx.save();ctx.globalAlpha=p.l;ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.fillRect(-6,-2,12,4);ctx.restore()}}if(alive)requestAnimationFrame(f);else ctx.clearRect(0,0,innerWidth,innerHeight)})();
+}
+
+render();observe();sprinkles();
+</script>
+</body>
+</html>
