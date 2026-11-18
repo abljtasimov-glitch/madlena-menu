@@ -455,6 +455,7 @@ const BY=Object.fromEntries(ITEMS.map(i=>[i.id,i]));
 const TAGS={spicy:["spicy","острое"],kids:["kids","детям"]};
 const fmt=n=>n.toLocaleString("ru-RU")+" ₸";
 const $=s=>document.querySelector(s);
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
 
 /* ================== КОРЗИНА ================== */
 let cart={};
@@ -539,13 +540,13 @@ function openCart(){openSheet(`<h3>Ваш заказ</h3><div id="cartBody"></di
 function renderCart(){
   const body=$("#cartBody");if(!body)return;const ids=Object.keys(cart).filter(id=>BY[id]);
   if(!ids.length){body.innerHTML=`<p class="lead">Пока пусто. Нажмите «+» у любого блюда 🍽</p>`;return}
-  const extra=order.mode==="table"?`<label class="field" id="f-req"><span>Номер столика</span><input inputmode="numeric" data-o="table" value="${order.table}" placeholder="например, 5"></label>`
-    :order.mode==="pickup"?`<label class="field"><span>Ко скольки подойдёте (необязательно)</span><input data-o="time" value="${order.time}" placeholder="например, 18:30"></label>`
-    :`<label class="field" id="f-req"><span>Адрес доставки</span><input data-o="address" value="${order.address}" placeholder="улица, дом, квартира"></label>`;
+  const extra=order.mode==="table"?`<label class="field" id="f-req"><span>Номер столика</span><input inputmode="numeric" data-o="table" value="${esc(order.table)}" placeholder="например, 5"></label>`
+    :order.mode==="pickup"?`<label class="field"><span>Ко скольки подойдёте (необязательно)</span><input data-o="time" value="${esc(order.time)}" placeholder="например, 18:30"></label>`
+    :`<label class="field" id="f-req"><span>Адрес доставки</span><input data-o="address" value="${esc(order.address)}" placeholder="улица, дом, квартира"></label>`;
   body.innerHTML=ids.map(id=>`<div class="line-item"><div class="mini">${artOf(BY[id])}</div><div class="nm">${BY[id].name}<small>${fmt(BY[id].price)}</small></div><div data-ctl="${id}">${ctlHTML(id)}</div></div>`).join("")+
    `<div class="seg">${[["table","За столиком"],["pickup","Самовывоз"],["delivery","Доставка"]].map(([k,t])=>`<button data-mode="${k}" class="${order.mode===k?"on":""}">${t}</button>`).join("")}</div>
-    ${extra}<label class="field"><span>Ваше имя</span><input data-o="name" value="${order.name}" placeholder="как к вам обращаться" autocomplete="given-name"></label>
-    <label class="field"><span>Комментарий</span><input data-o="comment" value="${order.comment}" placeholder="например, без лука / с собой"></label>
+    ${extra}<label class="field"><span>Ваше имя</span><input data-o="name" value="${esc(order.name)}" placeholder="как к вам обращаться" autocomplete="given-name"></label>
+    <label class="field"><span>Комментарий</span><input data-o="comment" value="${esc(order.comment)}" placeholder="например, без лука / с собой"></label>
     ${(()=>{const b=bill();return (b.fee?`<div class="sub-row"><span>Блюда</span><span>${fmt(b.s)}</span></div><div class="sub-row"><span>Обслуживание 10%</span><span>${fmt(b.fee)}</span></div>`:"")+`<div class="total"><span>Итого</span><span>${fmt(b.t)}</span></div>`})()}
     <div class="actions"><a class="btn btn-wa" id="waBtn" target="_blank" rel="noopener" href="#">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.6 14.2c-.2.7-1.4 1.3-2 1.4-.5 0-1.1.1-3.4-.9-2.9-1.2-4.7-4.1-4.8-4.3-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.4.1.1.1.7-.1 1.3z"/></svg>
